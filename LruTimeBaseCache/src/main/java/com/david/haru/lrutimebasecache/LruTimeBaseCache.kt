@@ -11,7 +11,7 @@ import java.util.*
 import java.util.concurrent.TimeUnit
 
 class LruTimeBaseCache<K, V>(
-    private val expiredTime: Int = EXPIRED_TIME_IN_MIN
+    private val expiredTimeInMinutes: Int = EXPIRED_TIME_IN_MIN
 ) {
     private  lateinit var  lruCache: LruCache<K, CacheItem<V>>
 
@@ -81,7 +81,7 @@ class LruTimeBaseCache<K, V>(
         val minutes =
             TimeUnit.MILLISECONDS.toMinutes(timeInterval)
 
-        if (minutes >= expiredTime) {
+        if (minutes >= expiredTimeInMinutes) {
             lruCache.remove(key)
             return true
         }
