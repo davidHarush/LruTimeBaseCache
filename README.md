@@ -3,10 +3,10 @@
 
 # LruTimeBaseCache
 
-### Wrapper class for android LruCache this util add expiredTime Feature to the android LruCache class.<br>
+### A Wrapper class for Android's LruCache which adds a time based expiration functionality.<br>
 - The expire Time In Units of Minutes.
 - The defult expire Time velue is 3 Minutes.
-- In case of time is expired then the retun velue will be a null.
+- When the time is up, the returned value will be null.
 - Support kotlin+Java
 
 
@@ -28,16 +28,16 @@ dependencies {
 ## How I use it.
 
 ```sh
-    val myCache : LruTimeBaseCache<Int,String> = LruTimeBaseCache()
-    dataCache.put(1,"first")
-    dataCache.put(2,"second")
-    Log.i(TAG,dataCache.get(1)!!)
+  val myCache : LruTimeBaseCache<Int,String> = LruTimeBaseCache()
+  dataCache.put(1,"first")
+  dataCache.put(2,"second")
+  Log.i(TAG,dataCache.get(1)!!)
 ```
 
 You can set the expire Time in the constructor, the defult velue is 3 Minutes.
 
 ```sh
-    val dataCache= LruTimeBaseCache<Int,String>(expiredTimeInMinutes =  10)
+  val dataCache= LruTimeBaseCache<Int,String>(expiredTimeInMinutes =  10)
 ```
 ### See also
 <a href="https://developer.android.com/reference/android/util/LruCache">Android Lru</a>
