@@ -29,9 +29,9 @@ dependencies {
 
 ```sh
   val myCache : LruTimeBaseCache<Int,String> = LruTimeBaseCache()
-  dataCache.put(1,"first")
-  dataCache.put(2,"second")
-  Log.i(TAG,dataCache.get(1)!!)
+  myCache.put(1,"first")
+  myCache.put(2,"second")
+  Log.i(TAG,myCache.get(1)!!)
 ```
 
 You can set the expire Time in the constructor, the defult velue is 3 Minutes.
