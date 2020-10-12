@@ -39,3 +39,5 @@ You can set the expire Time in the constructor, the defult velue is 3 Minutes.
 ```sh
     val dataCache= LruTimeBaseCache<Int,String>(expiredTimeInMinutes =  10)
 ```
+### See also
+<a href="https://developer.android.com/reference/android/util/LruCache">Android Lru</a>
