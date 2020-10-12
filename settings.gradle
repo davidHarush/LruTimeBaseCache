@@ -1,0 +1,3 @@
+include ':LruTimeBaseCache'
+include ':app'
+rootProject.name = "LruTimeBaseCache sample"
