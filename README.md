@@ -21,7 +21,7 @@ repositories {
 
 ```sh
 dependencies {
-  implementation 'com.github.davidHarush:LruTimeBaseCache:1.1'
+  implementation 'com.github.davidHarush:LruTimeBaseCache:1.2'
 }
 ```
 
