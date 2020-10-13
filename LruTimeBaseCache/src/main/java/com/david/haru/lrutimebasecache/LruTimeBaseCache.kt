@@ -11,9 +11,9 @@ import java.util.*
 import java.util.concurrent.TimeUnit
 
 class LruTimeBaseCache<K, V>(
-    private val expiredTimeInMinutes: Int = EXPIRED_TIME_IN_MIN
+    private var expiredTimeInMinutes: Int = EXPIRED_TIME_IN_MIN
 ) {
-    private lateinit var lruCache: LruCache<K, CacheItem<V>>
+    private var lruCache: LruCache<K, CacheItem<V>>
 
     init {
         val maxMemory = (Runtime.getRuntime().maxMemory() / 1024).toInt()
@@ -40,6 +40,12 @@ class LruTimeBaseCache<K, V>(
         lruCache.resize(cacheSize)
         return this
     }
+
+    fun setExpiredTime(expiredTimeInMinutes: Int): LruTimeBaseCache<K, V> {
+        this.expiredTimeInMinutes = expiredTimeInMinutes
+        return this
+    }
+
 
     fun put(@NonNull key: K, @NonNull data: V): LruTimeBaseCache<K, V> {
         lruCache.put(key, CacheItem(data = data))

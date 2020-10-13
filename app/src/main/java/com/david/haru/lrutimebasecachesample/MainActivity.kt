@@ -11,11 +11,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
-         val dataCache= LruTimeBaseCache<Int,String>()
-                .put(1,"first")
-                .put(2,"second")
+        val dataCache = LruTimeBaseCache<Int, String>()
+            .setExpiredTime(5)
+            .put(1, "first")
+            .put(2, "second")
 
-        Log.i("MainActivity",dataCache.get(1)!!)
+        Log.i("MainActivity", dataCache.get(1)!!)
 
     }
 }
