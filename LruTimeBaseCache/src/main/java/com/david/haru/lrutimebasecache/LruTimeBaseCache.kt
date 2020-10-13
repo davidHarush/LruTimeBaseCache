@@ -13,12 +13,12 @@ import java.util.concurrent.TimeUnit
 class LruTimeBaseCache<K, V>(
     private val expiredTimeInMinutes: Int = EXPIRED_TIME_IN_MIN
 ) {
-    private  lateinit var  lruCache: LruCache<K, CacheItem<V>>
+    private lateinit var lruCache: LruCache<K, CacheItem<V>>
 
     init {
         val maxMemory = (Runtime.getRuntime().maxMemory() / 1024).toInt()
         // Use 1/8th of the available memory for this memory cache.
-        val cacheSize =maxMemory / 8
+        val cacheSize = maxMemory / 8
         lruCache = LruCache(cacheSize)
     }
 
@@ -27,29 +27,33 @@ class LruTimeBaseCache<K, V>(
 
     }
 
-     /**
+    /**
      * Set a new CacheSize
-      *
-      * Copy from Lru class :
-      *   @param maxSize for caches that do not override {@link #sizeOf}, this is
-      *     the maximum number of entries in the cache. For all other caches,
-      *     this is the maximum sum of the sizes of the entries in this cache.
-      *
+     *
+     * Copy from Lru class :
+     *   @param maxSize for caches that do not override {@link #sizeOf}, this is
+     *     the maximum number of entries in the cache. For all other caches,
+     *     this is the maximum sum of the sizes of the entries in this cache.
+     *
      */
-    fun setCacheSize(@IntRange(from=1) cacheSize : Int){
-         lruCache.resize(cacheSize)
+    fun setCacheSize(@IntRange(from = 1) cacheSize: Int): LruTimeBaseCache<K, V> {
+        lruCache.resize(cacheSize)
+        return this
     }
 
-    fun put(@NonNull key: K,@NonNull data: V) {
+    fun put(@NonNull key: K, @NonNull data: V): LruTimeBaseCache<K, V> {
         lruCache.put(key, CacheItem(data = data))
+        return this
     }
 
-    fun remove(@NonNull key: K) {
+    fun remove(@NonNull key: K): LruTimeBaseCache<K, V> {
         lruCache.remove(key)
+        return this
     }
 
-    fun removeAll() {
+    fun removeAll(): LruTimeBaseCache<K, V> {
         lruCache.evictAll()
+        return this
     }
 
     fun getNumberOfEntries() = lruCache.size()

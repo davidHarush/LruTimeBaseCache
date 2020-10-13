@@ -12,9 +12,8 @@ class MainActivity : AppCompatActivity() {
 
 
          val dataCache= LruTimeBaseCache<Int,String>()
-
-        dataCache.put(1,"first")
-        dataCache.put(2,"second")
+                .put(1,"first")
+                .put(2,"second")
 
         Log.i("MainActivity",dataCache.get(1)!!)
 
