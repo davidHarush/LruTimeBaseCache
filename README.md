@@ -29,12 +29,14 @@ dependencies {
 
 ```sh
    val dataCache = LruTimeBaseCache<Int, String>()
+            .setExpiredTime(5)
             .put(1, "first")
             .put(2, "second")
-  Log.i(TAG,myCache.get(1)!!)
+
+        Log.i("MainActivity", dataCache.get(1)!!)
 ```
 
-You can set the expire Time in the constructor, the defult velue is 3 Minutes.
+You also can set the expire Time in the constructor, the defult velue is 3 Minutes.
 
 ```sh
   val dataCache= LruTimeBaseCache<Int,String>(expiredTimeInMinutes =  10)
