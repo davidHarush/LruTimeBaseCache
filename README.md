@@ -28,9 +28,9 @@ dependencies {
 ## How I use it.
 
 ```sh
-  val myCache : LruTimeBaseCache<Int,String> = LruTimeBaseCache()
-  myCache.put(1,"first")
-  myCache.put(2,"second")
+   val dataCache = LruTimeBaseCache<Int, String>()
+            .put(1, "first")
+            .put(2, "second")
   Log.i(TAG,myCache.get(1)!!)
 ```
 
