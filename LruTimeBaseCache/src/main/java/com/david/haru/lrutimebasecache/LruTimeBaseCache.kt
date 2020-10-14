@@ -9,6 +9,7 @@ import androidx.annotation.NonNull
 import androidx.annotation.Nullable
 import java.util.*
 import java.util.concurrent.TimeUnit
+import kotlin.collections.HashMap
 
 class LruTimeBaseCache<K, V>(
     private var expiredTimeInMinutes: Int = EXPIRED_TIME_IN_MIN
@@ -36,37 +37,40 @@ class LruTimeBaseCache<K, V>(
      *     this is the maximum sum of the sizes of the entries in this cache.
      *
      */
-    fun setCacheSize(@IntRange(from = 1) cacheSize: Int): LruTimeBaseCache<K, V> {
+    public fun setCacheSize(@IntRange(from = 1) cacheSize: Int): LruTimeBaseCache<K, V> {
         lruCache.resize(cacheSize)
         return this
     }
 
-    fun setExpiredTime(expiredTimeInMinutes: Int): LruTimeBaseCache<K, V> {
+    public fun setExpiredTime(expiredTimeInMinutes: Int): LruTimeBaseCache<K, V> {
         this.expiredTimeInMinutes = expiredTimeInMinutes
         return this
     }
 
 
-    fun put(@NonNull key: K, @NonNull data: V): LruTimeBaseCache<K, V> {
+    public fun put(@NonNull key: K, @NonNull data: V): LruTimeBaseCache<K, V> {
         lruCache.put(key, CacheItem(data = data))
         return this
     }
 
-    fun remove(@NonNull key: K): LruTimeBaseCache<K, V> {
+    public fun remove(@NonNull key: K): LruTimeBaseCache<K, V> {
         lruCache.remove(key)
         return this
     }
 
-    fun removeAll(): LruTimeBaseCache<K, V> {
+    public fun removeAll(): LruTimeBaseCache<K, V> {
         lruCache.evictAll()
         return this
     }
 
-    fun getNumberOfEntries() = lruCache.size()
+    public fun getNumberOfEntries(): Int{
+        clearAllExpired()
+        return lruCache.size()
+    }
 
 
     @Nullable
-    fun get(key: K): V? {
+    public fun get(key: K): V? {
         val cacheItem: CacheItem<V> = lruCache[key] ?: return null
 
         return if (removeIfExpired(key, cacheItem)) {
@@ -74,6 +78,30 @@ class LruTimeBaseCache<K, V>(
         } else {
             cacheItem.data
         }
+    }
+
+    public fun clearAllExpired(): LruTimeBaseCache<K, V> {
+
+        val snapshot = lruCache.snapshot()
+        for ((key, value) in snapshot) {
+            removeIfExpired(key, lruCache.get(key))
+        }
+        return this
+    }
+
+   public fun getAllAsMap(): MutableMap<K, V> {
+
+        val map = mutableMapOf<K,V>()
+        val snapshot = lruCache.snapshot()
+        for ((key, value) in snapshot) {
+            map[key] = value.data
+        }
+        return map
+    }
+
+
+    override fun toString(): String{
+        return getAllAsMap().toString()
     }
 
     /**********************
