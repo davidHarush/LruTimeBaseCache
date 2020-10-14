@@ -1,4 +1,8 @@
 # LruTimeBaseCache
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/davidHarush/LruTimeBaseCache)
+![GitHub top language](https://img.shields.io/github/languages/top/davidHarush/LruTimeBaseCache)
+![GitHub repo size](https://img.shields.io/github/repo-size/davidHarush/LruTimeBaseCache)
+![GitHub issues](https://img.shields.io/github/issues/davidHarush/LruTimeBaseCache)
 
 ### A Wrapper class for Android's LruCache which adds a time based expiration functionality.<br>
 - The expire Time In Units of Minutes.
