@@ -1,6 +1,3 @@
-[![](https://jitpack.io/v/davidHarush/LruTimeBaseCache.svg)](https://jitpack.io/#davidHarush/LruTimeBaseCache)
-
-
 # LruTimeBaseCache
 
 ### A Wrapper class for Android's LruCache which adds a time based expiration functionality.<br>
@@ -23,9 +20,16 @@ repositories {
 dependencies {
   implementation 'com.github.davidHarush:LruTimeBaseCache:1.4'
 }
-```
 
-## How I use it.
+```
+For more info :<br>
+[![](https://jitpack.io/v/davidHarush/LruTimeBaseCache.svg)](https://jitpack.io/#davidHarush/LruTimeBaseCache)
+
+<br>
+<br>
+
+
+## How to use it.
 
 ```sh
    val dataCache = LruTimeBaseCache<Int, String>()
