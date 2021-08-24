@@ -27,7 +27,7 @@ allprojects {
 Step 2. Add the dependency<br>
 ```sh
 dependencies {
-  implementation 'com.github.davidHarush:LruTimeBaseCache:1.4'
+  implementation 'com.github.davidHarush:LruTimeBaseCache:1.5'
 }
 
 ```
