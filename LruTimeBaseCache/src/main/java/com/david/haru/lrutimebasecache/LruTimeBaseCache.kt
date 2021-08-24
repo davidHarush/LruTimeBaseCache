@@ -18,9 +18,8 @@ class LruTimeBaseCache<K, V>(
 
     init {
         val maxMemory = (Runtime.getRuntime().maxMemory() / 1024).toInt()
-        // Use 1/8th of the available memory for this memory cache.
-        val cacheSize = maxMemory / 8
-        lruCache = LruCache(cacheSize)
+        // Use 1/10th of the available memory for this memory cache.
+        lruCache = LruCache(maxMemory/10)
     }
 
     companion object {
@@ -113,8 +112,7 @@ class LruTimeBaseCache<K, V>(
      * return true if item is Expired (and removed)
      */
     private fun removeIfExpired(key: K, cacheItem: CacheItem<V>): Boolean {
-        val timeInterval =
-            System.currentTimeMillis() - cacheItem.creationTime.time
+        val timeInterval =  System.currentTimeMillis() - cacheItem.creationTime
 
         val minutes =
             TimeUnit.MILLISECONDS.toMinutes(timeInterval)
@@ -127,7 +125,7 @@ class LruTimeBaseCache<K, V>(
     }
 
     private data class CacheItem<V>(var data: V) {
-        var creationTime: Date = Date()
+        var creationTime = System.currentTimeMillis()
     }
 
 }
